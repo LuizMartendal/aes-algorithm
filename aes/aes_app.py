@@ -1,4 +1,5 @@
 from tkinter import filedialog, messagebox
+from algorithm.aes import AES
 import tkinter as tk
 import os
 
@@ -99,7 +100,7 @@ class AESApp:
         return key_bytes
 
     def encrypt_data(self, data, key):
-        return data
+        return AES.encrypt(data, key)
 
     def decrypt_data(self, data, key):
-        return data
+        return AES.decrypt(data, key)

@@ -1,6 +1,6 @@
 import tkinter as tk
 
-from AESApp import AESApp
+from aes_app import AESApp
 
 if __name__ == "__main__":
     root = tk.Tk()
