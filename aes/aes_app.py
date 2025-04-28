@@ -60,12 +60,6 @@ class AESApp:
             messagebox.showerror("Erro", "Digite a chave!")
             return
 
-        try:
-            key = self.parse_key(key_text)
-        except Exception as e:
-            messagebox.showerror("Erro", f"Chave inválida! {str(e)}")
-            return
-
         output_path = filedialog.asksaveasfilename(
             title="Salvar arquivo",
             defaultextension=".enc" if mode == "encrypt" else ".dec",
@@ -81,9 +75,9 @@ class AESApp:
                 content = f_in.read()
 
             if mode == "encrypt":
-                processed_content = self.encrypt_data(content, key)
+                processed_content = self.encrypt_data(content, key_text)
             else:
-                processed_content = self.decrypt_data(content, key)
+                processed_content = self.decrypt_data(content, key_text)
 
             with open(output_path, 'wb') as f_out:
                 f_out.write(processed_content)
@@ -91,13 +85,6 @@ class AESApp:
             messagebox.showinfo("Sucesso", f"Arquivo {mode}ado com sucesso!")
         except Exception as e:
             messagebox.showerror("Erro", f"Ocorreu um erro: {str(e)}")
-
-    def parse_key(self, key_text):
-        parts = key_text.strip().split(',')
-        if len(parts) != 16:
-            raise ValueError("A chave deve ter exatamente 16 números (bytes) separados por vírgula.")
-        key_bytes = bytes(int(b.strip()) for b in parts)
-        return key_bytes
 
     def encrypt_data(self, data, key):
         return AES.encrypt(data, key)
