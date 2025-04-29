@@ -87,7 +87,9 @@ class AESApp:
             messagebox.showerror("Erro", f"Ocorreu um erro: {str(e)}")
 
     def encrypt_data(self, data, key):
-        return AES.encrypt(data, key)
+        aes = AES(key)  # Instancia a classe AES com a chave fornecida
+        return aes.encrypt(data)
 
     def decrypt_data(self, data, key):
-        return AES.decrypt(data, key)
+        aes = AES(key)  # Instancia a classe AES com a chave fornecida
+        return aes.decrypt(data)
