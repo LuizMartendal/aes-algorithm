@@ -46,7 +46,6 @@ class AESApp:
         self.filename_label.config(text=os.path.basename(self.file_path))
 
     def process_file(self, mode):
-        # self.encrypt_data(b'DESENVOLVIMENTO!', '65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80')
         if not self.file_path:
             messagebox.showerror("Erro", "Nenhum arquivo selecionado!")
             return
