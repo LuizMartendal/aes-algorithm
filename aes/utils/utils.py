@@ -16,6 +16,21 @@ def pad_pkcs7(data):
     return data + bytes([padding] * padding)
 
 
+def unpad_pkcs7(data):
+    if not data:
+        raise ValueError("Dados vazios")
+
+    padding_len = data[-1]
+
+    if padding_len < 1 or padding_len > 16:
+        raise ValueError("Tamanho de padding inválido")
+
+    if data[-padding_len:] != bytes([padding_len]) * padding_len:
+        raise ValueError("Padding inválido")
+
+    return data[:-padding_len]
+
+
 def bytes_to_state_matrices(data: bytes) -> list:
     return [data[i:i + 16] for i in range(0, len(data), 16)]
 

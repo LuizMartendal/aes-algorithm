@@ -46,46 +46,46 @@ class AESApp:
         self.filename_label.config(text=os.path.basename(self.file_path))
 
     def process_file(self, mode):
-        self.encrypt_data(b'DESENVOLVIMENTO!', '65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80')
-        # if not self.file_path:
-        #     messagebox.showerror("Erro", "Nenhum arquivo selecionado!")
-        #     return
-        #
-        # output_filename = self.output_name.get()
-        # if not output_filename:
-        #     messagebox.showerror("Erro", "Digite um nome para o arquivo de saída!")
-        #     return
-        #
-        # key_text = self.key_entry.get()
-        # if not key_text:
-        #     messagebox.showerror("Erro", "Digite a chave!")
-        #     return
-        #
-        # output_path = filedialog.asksaveasfilename(
-        #     title="Salvar arquivo",
-        #     defaultextension=".enc" if mode == "encrypt" else ".dec",
-        #     filetypes=[('Todos os Arquivos', '*.*')],
-        #     initialfile=output_filename
-        # )
-        #
-        # if not output_path:
-        #     return
-        #
-        # try:
-        #     with open(self.file_path, 'rb') as f_in:
-        #         content = f_in.read()
-        #
-        #     if mode == "encrypt":
-        #         processed_content = self.encrypt_data(content, key_text)
-        #     else:
-        #         processed_content = self.decrypt_data(content, key_text)
-        #
-        #     with open(output_path, 'wb') as f_out:
-        #         f_out.write(processed_content)
-        #
-        #     messagebox.showinfo("Sucesso", f"Arquivo {mode}ado com sucesso!")
-        # except Exception as e:
-        #     messagebox.showerror("Erro", f"Ocorreu um erro: {str(e)}")
+        # self.encrypt_data(b'DESENVOLVIMENTO!', '65,66,67,68,69,70,71,72,73,74,75,76,77,78,79,80')
+        if not self.file_path:
+            messagebox.showerror("Erro", "Nenhum arquivo selecionado!")
+            return
+
+        output_filename = self.output_name.get()
+        if not output_filename:
+            messagebox.showerror("Erro", "Digite um nome para o arquivo de saída!")
+            return
+
+        key_text = self.key_entry.get()
+        if not key_text:
+            messagebox.showerror("Erro", "Digite a chave!")
+            return
+
+        output_path = filedialog.asksaveasfilename(
+            title="Salvar arquivo",
+            defaultextension=".enc" if mode == "encrypt" else ".dec",
+            filetypes=[('Todos os Arquivos', '*.*')],
+            initialfile=output_filename
+        )
+
+        if not output_path:
+            return
+
+        try:
+            with open(self.file_path, 'rb') as f_in:
+                content = f_in.read()
+
+            if mode == "encrypt":
+                processed_content = self.encrypt_data(content, key_text)
+            else:
+                processed_content = self.decrypt_data(content, key_text)
+
+            with open(output_path, 'wb') as f_out:
+                f_out.write(processed_content)
+
+            messagebox.showinfo("Sucesso", f"Arquivo {mode}ado com sucesso!")
+        except Exception as e:
+            messagebox.showerror("Erro", f"Ocorreu um erro: {str(e)}")
 
     def encrypt_data(self, data, key):
         aes = AES(key)  # Instancia a classe AES com a chave fornecida
